@@ -31,4 +31,5 @@ CHIP Mux8Way16 {
     Mux16 (a=w0 ,b=w1 ,sel=sel[1],out=w4);
     Mux16 (a=w2 ,b=w3 ,sel=sel[1],out=w5);
     Mux16 (a=w4 ,b=w5 ,sel=sel[2],out=out);
+    
 }
