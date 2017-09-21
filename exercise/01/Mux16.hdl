@@ -15,4 +15,5 @@ CHIP Mux16 {
 
     PARTS:
     // Put your code here:
+    Mux (a=a[0],b=,sel=,out=)
 }
