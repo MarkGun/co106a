@@ -17,4 +17,18 @@ CHIP Mux4Way16 {
 
     PARTS:
     // Put your code here:
+    Mux4 (a=a[0..3],b=b[0..3],sel=sel[0],out[0]=e0,out[1]=e1,out[2]=e2,out[3]=e3);
+    Mux4 (a=a[4..7],b=b[4..7],sel=sel[0],out[0]=e4,out[1]=e5,out[2]=e6,out[3]=e7);
+    Mux4 (a=a[8..11],b=b[8..11],sel=sel[0],out[0]=e8,out[1]=e9,out[2]=e10,out[3]=e11);
+    Mux4 (a=a[12..15],b=b[12..15],sel=sel[0],out[0]=e12,out[1]=e13,out[2]=e14,out[3]=e15);
+
+    Mux4 (a=c[0..3]  ,b=d[0..3]  ,sel=sel[0],out[0]=f0 ,out[1]=f1 ,out[2]=f2 ,out[3]=f3);
+    Mux4 (a=c[4..7]  ,b=d[4..7]  ,sel=sel[0],out[0]=f4 ,out[1]=f5 ,out[2]=f6 ,out[3]=f7);
+    Mux4 (a=c[8..11] ,b=d[8..11] ,sel=sel[0],out[0]=f8 ,out[1]=f9 ,out[2]=f10,out[3]=f11);
+    Mux4 (a=c[12..15],b=d[12..15],sel=sel[0],out[0]=f12,out[1]=f13,out[2]=f14,out[3]=f15);
+
+    Mux4 (a[0]=e0 ,a[1]=e1 ,a[2]=e2 ,a[3]=e3 ,  b[0]=f0 ,b[1]=f1 ,b[2]=f2 ,b[3]=f3 ,sel=sel[1],out=out[0..3]);
+    Mux4 (a[0]=e4 ,a[1]=e5 ,a[2]=e6 ,a[3]=e7 ,  b[0]=f4 ,b[1]=f5 ,b[2]=f6 ,b[3]=f7 ,sel=sel[1],out=out[4..7]);
+    Mux4 (a[0]=e8 ,a[1]=e9 ,a[2]=e10,a[3]=e11,  b[0]=f8 ,b[1]=f9 ,b[2]=f10,b[3]=f11,sel=sel[1],out=out[8..11]);
+    Mux4 (a[0]=e12,a[1]=e13,a[2]=e14,a[3]=e15,  b[0]=f12,b[1]=f13,b[2]=f14,b[3]=f15,sel=sel[1],out=out[12..15]); 
 }
