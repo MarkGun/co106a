@@ -2,6 +2,7 @@
 // and the book "The Elements of Computing Systems"
 // by Nisan and Schocken, MIT Press.
 // File name: projects/02/FullAdder.hdl
+//FullAdder
 
 /**
  * Computes the sum of three bits.
@@ -14,4 +15,7 @@ CHIP FullAdder {
 
     PARTS:
     // Put you code here:
+    HalfAdder (a=a,b=b,sum=c0,carry=c1);
+    HalfAdder (a=c0,b=c,sum=sum,carry=c2);
+    Or (a=c1,b=c2,out=carry);
 }
