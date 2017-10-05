@@ -49,9 +49,18 @@ CHIP ALU {
    Xor16 (a=zerox,b=nx,out=notx);
 
    Mux16 (a=y, b=false, sel=zy, out=zeroy);// when zy==1, then y=0
-   Not16 (in=zerox, out=nxo);
-   Mux16 (a=zerox,b=nxo,sel=nx,out=notx);//when xz=1, then y=!x 
+   //Not16 (in=zeroy, out=nyo);
+   //Mux16 (a=zeroy,b=nyo,sel=y,out=noty);//when xz=1, then y=!x 
+   Xor16 (a=zeroy,b=ny,out=noty);
 
+   Add16(a=notx, b=noty, out=xaddy);
+   And16(a=notx, b=noty, out=xandy);
+   Mux16 (a=xandy, b=xaddy, sel=f, out=addout);
 
-   And16 (a=x, b=0, out=ix);
+   Xor16(a=addout, b=no, out=notout);
+
+   Or16Way (in=notout, out=zrsw);
+   Not (in=zrsw, out=zr);
+   And (a=notout[15],b=true, out=ng);
+
 }
