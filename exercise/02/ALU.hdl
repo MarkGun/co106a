@@ -44,23 +44,28 @@ CHIP ALU {
     PARTS:
    // Put you code here:
    Mux16 (a=x, b=false, sel=zx, out=zerox);// when zx==1, then x=0
-   //Not16 (in=zerox, out=nxo);
-   //Mux16 (a=zerox,b=nxo,sel=nx,out=notx);//when xz=1, then x=!x
-   Xor16 (a=zerox,b=nx,out=notx);
+   Not16 (in=zerox, out=nxo);
+   Mux16 (a=zerox,b=nxo,sel=nx,out=notx);//when xz=1, then x=!x
+   //Xor16 (a=zerox,b[0]=nx,b[1]=nx,b[2]=nx,b[3]=nx,b[4]=nx,out=notx);
 
    Mux16 (a=y, b=false, sel=zy, out=zeroy);// when zy==1, then y=0
-   //Not16 (in=zeroy, out=nyo);
-   //Mux16 (a=zeroy,b=nyo,sel=y,out=noty);//when xz=1, then y=!x 
-   Xor16 (a=zeroy,b=ny,out=noty);
+   Not16 (in=zeroy, out=nyo);
+   Mux16 (a=zeroy,b=nyo,sel=ny,out=noty);//when xz=1, then y=!x 
+   //Xor16 (a=zeroy,b=ny,out=noty);
 
    Add16(a=notx, b=noty, out=xaddy);
    And16(a=notx, b=noty, out=xandy);
    Mux16 (a=xandy, b=xaddy, sel=f, out=addout);
 
-   Xor16(a=addout, b=no, out=notout);
+   Not16 (in=addout, out=naddout);
+   Mux16 (a=addout,b=naddout,sel=no,out=notout);
+   //Xor16(a=addout, b=no, out=notout);
 
    Or16Way (in=notout, out=zrsw);
    Not (in=zrsw, out=zr);
-   And (a=notout[15],b=true, out=ng);
+   //Not (in[0]=notout[15], out=nnotout);
+   //And (a=notout[15],b=true, out=ng);
+   And16 (a=notout, b=true, out[15]=ng);
+   And16 (a=notout, b=true, out=out);
 
 }
