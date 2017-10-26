@@ -17,4 +17,33 @@ CHIP PC {
 
     PARTS:
     // Put your code here:
+    /*Not (in=reset,out=NRE);
+    And16 (a=in,b=false,out=Real0);
+    And16 (a=in,b=true,out=Real1);
+    Mux16(a=Real0, b=Real1, sel=NRE, out=Realin0);
+    Or (a=load, b=reset,out=Realload);
+    Add16(a=o0, b[0]=NRLF, b[1..15]=false, out=o1);
+    Not(in=Realload,out=NRL);
+    And(a=NRL, b=inc, out=NRLF);
+    //Mux16(a=Realin1, b=in, sel=load, out=Realin);
+    //Mux16(a=Realin0, b=in, sel=NRE, out=Realinfinal);
+    Mux16(a=o1,b=Realin0, sel=NRL,out=RealinfinalF);*/
+    Mux16(a=in, b=false, sel=reset, out=zero);
+    Add16(a=feedback, b[0]=inc, b[1..15]=false, out=BFinc);
+    Or(a=reset, b=load, out=c0);
+    Not(in=inc, out=Ninc);
+    Or(a=c0, b=Ninc, out=c1);
+    Not(in=c1, out=c2);
+    Mux16(a=zero, b=BFinc, sel=c2, out=realin);
+    Register(in=realin, load=true, out=out, out=feedback);
+    /*Register(in=zero, load=true, out=BFzero);
+    Or(a=reset, b=load, out=addSW);
+    Mux16(a=BFzero, b=FOut, sel=addSW, out=add0);
+    Bit(in=inc, load=true, out=BFinc);
+    Not(in=addSW, out=NaddSW);
+    And(a=NaddSW, b=BFinc, out=add1);
+    Add16(a=add0, b[0]=add1, b[1..15]=false, out=FFOut, out=Out);
+    Register(in=FFOut, load=true, out=FOut);*/
+    //DFF(in=FFout, out=Fout);
+    //Register (in=RealinfinalF , load=Realload , out=o0 );
 }
