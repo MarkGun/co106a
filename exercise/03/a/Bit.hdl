@@ -15,4 +15,10 @@ CHIP Bit {
 
     PARTS:
     // Put your code here:
+    DFF (in=in,out=Beforein);
+    DFF (in=load,out=Beforeload);
+    Mux (a=Beforeout,b=Beforein,sel=Beforeload,out=out0);
+    //And (a=out0,b=out0,out=o2);
+    DFF (in=out0,out=Beforeout);
+    And (a=out0,b=out0,out=out);
 }
