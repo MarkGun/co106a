@@ -27,5 +27,15 @@ CHIP Memory {
     OUT out[16];
 
     PARTS:
+    //N[14]是address的最後一碼
+    //Not(in=address[14], out=N14);
     // Put your code here:
+    Not(in=address[14], out=Nadrs14);
+    And(a=load, b=Nadrs14, out=RAMload);
+    And(a=load, b=address[14] , out=Screenload);
+    RAM16K(in=in, load=RAMload, address=address[0..13], out=RAMout);
+    Screen(in=in, load=Screenload, address=address[0..12], out=Screenout);
+    Keyboard(out=Keyboardout);
+    Mux16(a=Screenout, b=Keyboardout, sel=address[13], out=SKout);
+    Mux16(a=RAMout, b=SKout, sel=address[14], out=out);
 }
